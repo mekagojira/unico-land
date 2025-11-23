@@ -15,14 +15,14 @@ export default function LuxuryGallery() {
       id: 'rental',
       image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=90',
       aspect: 'aspect-[4/3]',
-    },
+    }, 
     {
-      id: 'management',
-      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1200&q=90',
+      id: 'foreignSupport',
+      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=90',
       aspect: 'aspect-[4/3]',
     },
     {
-      id: 'foreignSupport',
+      id: 'management',
       image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=90',
       aspect: 'aspect-[4/3]',
     },

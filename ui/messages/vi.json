@@ -44,31 +44,19 @@
     "imagePlaceholder": "Hình ảnh ví dụ",
     "sales": {
       "title": "Môi giới mua bán bất động sản",
-      "description": "Hỗ trợ mua bán nhà ở và bất động sản đầu tư. Tư vấn vay mua nhà cho người nước ngoài.",
-      "detail1": "Dịch vụ môi giới mua bán bất động sản hỗ trợ mua bán nhà ở và bất động sản đầu tư, đáp ứng nhu cầu của khách hàng.",
-      "detail2": "Đối với khách hàng nước ngoài, chúng tôi cũng tư vấn về vay mua nhà, hỗ trợ giao dịch bất động sản tại Nhật Bản diễn ra suôn sẻ.",
-      "detail3": ""
+      "description": "Hỗ trợ mua bán nhà ở và bất động sản đầu tư. Tư vấn vay mua nhà cho người nước ngoài."
     },
     "rental": {
       "title": "Môi giới cho thuê",
-      "description": "Đề xuất bất động sản phù hợp nhất cho khách hàng trong và ngoài nước với hỗ trợ tiếng Nhật và tiếng Anh.",
-      "detail1": "Dịch vụ môi giới cho thuê, với hỗ trợ tiếng Nhật và tiếng Anh, đề xuất bất động sản phù hợp nhất cho khách hàng trong và ngoài nước.",
-      "detail2": "Chúng tôi lắng nghe cẩn thận nhu cầu của khách hàng và hỗ trợ tìm bất động sản phù hợp.",
-      "detail3": ""
+      "description": "Đề xuất bất động sản phù hợp nhất cho khách hàng trong và ngoài nước với hỗ trợ tiếng Nhật và tiếng Anh."
     },
     "management": {
       "title": "Quản lý cho thuê",
-      "description": "Thay mặt chủ sở hữu, chúng tôi xử lý toàn bộ từ ứng phó với người thuê, quản lý tiền thuê đến sắp xếp sửa chữa.",
-      "detail1": "Dịch vụ quản lý cho thuê cung cấp dịch vụ quản lý toàn diện từ ứng phó với người thuê, quản lý tiền thuê đến sắp xếp sửa chữa để tối đa hóa giá trị tài sản của chủ sở hữu.",
-      "detail2": "Bằng cách thay mặt xử lý các công việc quản lý phức tạp, chúng tôi giảm gánh nặng cho chủ sở hữu và hỗ trợ đảm bảo thu nhập ổn định.",
-      "detail3": ""
+      "description": "Thay mặt chủ sở hữu, chúng tôi xử lý toàn bộ từ ứng phó với người thuê, quản lý tiền thuê đến sắp xếp sửa chữa."
     },
     "foreignSupport": {
       "title": "Hỗ trợ người nước ngoài",
-      "description": "Xác nhận tư cách lưu trú, ứng phó với công ty bảo lãnh, dịch hợp đồng - chúng tôi có hệ thống để người nước ngoài có thể ký hợp đồng yên tâm.",
-      "detail1": "Dịch vụ hỗ trợ người nước ngoài có hệ thống để người nước ngoài có thể ký hợp đồng yên tâm, bao gồm xác nhận tư cách lưu trú, ứng phó với công ty bảo lãnh, dịch hợp đồng.",
-      "detail2": "Đội ngũ nhân viên đa ngôn ngữ sẽ giải tỏa lo lắng của khách hàng và hỗ trợ quy trình ký hợp đồng suôn sẻ.",
-      "detail3": ""
+      "description": "Xác nhận tư cách lưu trú, ứng phó với công ty bảo lãnh, dịch hợp đồng - chúng tôi có hệ thống để người nước ngoài có thể ký hợp đồng yên tâm."
     },
     "corporate": {
       "title": "Dịch vụ cho doanh nghiệp",

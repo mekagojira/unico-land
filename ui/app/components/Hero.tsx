@@ -1,16 +1,39 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import HeroSlideshow from './HeroSlideshow';
+import LoadingScreen from './LoadingScreen';
+import { isImageCached, heroImages } from '@/app/utils/imagePreloader';
 
 export default function Hero() {
   const t = useTranslations('hero');
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
+  // Check if images are already cached on mount
+  useEffect(() => {
+    const allCached = heroImages.every((img) => isImageCached(img.url));
+    if (allCached) {
+      setIsLoading(false);
+      setLoadingProgress(100);
+    }
+  }, []);
+
+  const handleLoadingChange = (loading: boolean, progress: number) => {
+    setIsLoading(loading);
+    setLoadingProgress(progress);
+  };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Luxury Image Slideshow Background */}
-      <div className="absolute inset-0 z-0">
-        <HeroSlideshow />
-      </div>
+    <>
+      <LoadingScreen isLoading={isLoading} progress={loadingProgress} />
+      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Luxury Image Slideshow Background */}
+        <div className="absolute inset-0 z-0">
+          <HeroSlideshow onLoadingChange={handleLoadingChange} />
+        </div>
 
       {/* Additional overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/40 z-10"></div>
@@ -95,5 +118,6 @@ export default function Hero() {
         </svg>
       </div>
     </section>
+    </>
   );
 }
