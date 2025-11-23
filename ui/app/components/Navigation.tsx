@@ -13,7 +13,7 @@ export default function Navigation() {
   const navItems = [
     { key: 'home', href: '/', isLink: false },
     { key: 'about', href: '/company', isLink: true },
-    { key: 'services', href: '#services', isLink: false }, 
+    { key: 'services', href: '/service', isLink: true }, 
     { key: 'news', href: '#news', isLink: false },
     { key: 'blog', href: '#blog', isLink: false },
     { key: 'contact', href: '/contact', isLink: true },
