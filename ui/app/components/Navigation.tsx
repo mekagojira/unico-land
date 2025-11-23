@@ -205,17 +205,11 @@ export default function Navigation() {
                 )
               ))}
             </div>
-          </nav>
-
-          {/* Sidebar Footer */}
-          <div className="border-t border-gray-200 p-6">
-            <div className="mb-4">
+            <div className="pt-4 pl-7">
               <LanguageSwitcher />
             </div>
-            <div className="text-xs text-gray-500 text-center">
-              <p>Uni-Co 株式会社</p>
-            </div>
-          </div>
+          </nav>
+ 
         </div>
       </div>
     </>
