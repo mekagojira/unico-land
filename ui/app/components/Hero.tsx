@@ -39,7 +39,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/40 z-10"></div>
 
       {/* Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 md:pt-0">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-48 md:pt-0">
         <div className="text-center max-w-6xl mx-auto">
           {/* Premium badge */}
           <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 mb-6 md:mb-8 bg-white/90 backdrop-blur-md border border-blue-200/50 rounded-full shadow-lg">
