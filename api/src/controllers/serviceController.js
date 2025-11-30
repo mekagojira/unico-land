@@ -5,6 +5,7 @@ import {
   extractKeyFromUrl,
   getPresignedUrlForKey,
 } from "../utils/imageUtils.js";
+import { memoryCache, CacheKeys } from "../utils/memoryCache.js";
 
 // @desc    Get all services
 // @route   GET /api/services
@@ -12,6 +13,21 @@ import {
 export const getAllServices = async (c) => {
   try {
     const { active } = c.req.query();
+    const locale = c.req.query("locale") || "jp";
+    const isAdmin = c.get("user"); // Check if user is authenticated
+
+    // Check cache first (only for public requests, not admin)
+    if (!isAdmin) {
+      const cacheKey = CacheKeys.SERVICES(locale, active === "true");
+      const cached = memoryCache.get(cacheKey);
+      if (cached) {
+        return c.json({
+          success: true,
+          data: cached,
+        });
+      }
+    }
+
     const db = await getD1Client(c.env || {});
 
     let services;
@@ -22,9 +38,6 @@ export const getAllServices = async (c) => {
     }
 
     // Convert to JSON format - return full data for admin, locale-specific for public
-    const locale = c.req.query("locale") || "jp";
-    const isAdmin = c.get("user"); // Check if user is authenticated
-
     // Convert image keys to presigned URLs
     const servicesData = await Promise.all(
       services.map(async (service) => {
@@ -72,6 +85,12 @@ export const getAllServices = async (c) => {
       })
     );
 
+    // Cache the result (only for public requests)
+    if (!isAdmin) {
+      const cacheKey = CacheKeys.SERVICES(locale, active === "true");
+      memoryCache.set(cacheKey, servicesData);
+    }
+
     return c.json({
       success: true,
       data: servicesData,
@@ -88,6 +107,20 @@ export const getService = async (c) => {
   try {
     const { id } = c.req.param();
     const locale = c.req.query("locale") || "jp";
+    const isAdmin = c.get("user"); // Check if user is authenticated
+
+    // Check cache first (only for public requests, not admin)
+    if (!isAdmin) {
+      const cacheKey = CacheKeys.SERVICE(id, locale);
+      const cached = memoryCache.get(cacheKey);
+      if (cached) {
+        return c.json({
+          success: true,
+          data: cached,
+        });
+      }
+    }
+
     const db = await getD1Client(c.env || {});
 
     const service = await Service.findById(db, id);
@@ -124,6 +157,12 @@ export const getService = async (c) => {
     const serviceData = service.toJSON(locale);
     serviceData.images = presignedImages;
 
+    // Cache the result (only for public requests)
+    if (!isAdmin) {
+      const cacheKey = CacheKeys.SERVICE(id, locale);
+      memoryCache.set(cacheKey, serviceData);
+    }
+
     return c.json({
       success: true,
       data: serviceData,
@@ -147,6 +186,10 @@ export const createService = async (c) => {
     }
 
     const service = await Service.create(db, body);
+
+    // Invalidate cache on create - clear all service-related cache
+    memoryCache.deletePattern("services:*");
+    memoryCache.deletePattern("service:*");
 
     return c.json(
       {
@@ -192,6 +235,10 @@ export const updateService = async (c) => {
       );
     }
 
+    // Invalidate cache on update - clear all service-related cache
+    memoryCache.deletePattern("services:*");
+    memoryCache.deletePattern("service:*");
+
     return c.json({
       success: true,
       data: service,
@@ -221,6 +268,10 @@ export const deleteService = async (c) => {
         404
       );
     }
+
+    // Invalidate cache on delete - clear all service-related cache
+    memoryCache.deletePattern("services:*");
+    memoryCache.deletePattern("service:*");
 
     return c.json({
       success: true,

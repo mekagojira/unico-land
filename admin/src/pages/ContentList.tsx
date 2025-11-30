@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -15,19 +15,18 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  TextField,
   Select,
   FormControl,
   InputLabel,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Add as AddIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
   MoreVert as MoreVertIcon,
-} from '@mui/icons-material';
-import { contentAPI, Content } from '../services/api';
+} from "@mui/icons-material";
+import { contentAPI, Content } from "../services/api";
 
 export default function ContentList() {
   const [contents, setContents] = useState<Content[]>([]);
@@ -36,9 +35,9 @@ export default function ContentList() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [total, setTotal] = useState(0);
   const [filters, setFilters] = useState({
-    type: '',
-    status: '',
-    locale: '',
+    type: "",
+    status: "",
+    locale: "",
   });
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -57,7 +56,7 @@ export default function ContentList() {
       setContents(response.data);
       setTotal(response.pagination.total);
     } catch (error) {
-      console.error('Failed to fetch contents:', error);
+      console.error("Failed to fetch contents:", error);
     } finally {
       setLoading(false);
     }
@@ -68,13 +67,13 @@ export default function ContentList() {
   }, [page, rowsPerPage, filters]);
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Bạn có chắc chắn muốn xóa nội dung này?')) {
+    if (window.confirm("Bạn có chắc chắn muốn xóa nội dung này?")) {
       try {
         await contentAPI.delete(id);
         fetchContents();
       } catch (error) {
-        console.error('Failed to delete content:', error);
-        alert('Xóa nội dung thất bại');
+        console.error("Failed to delete content:", error);
+        alert("Xóa nội dung thất bại");
       }
     }
     handleMenuClose();
@@ -92,47 +91,54 @@ export default function ContentList() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'published':
-        return 'success';
-      case 'draft':
-        return 'warning';
-      case 'archived':
-        return 'default';
+      case "published":
+        return "success";
+      case "draft":
+        return "warning";
+      case "archived":
+        return "default";
       default:
-        return 'default';
+        return "default";
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'post':
-        return 'primary';
-      case 'page':
-        return 'secondary';
-      case 'news':
-        return 'info';
-      case 'announcement':
-        return 'warning';
+      case "post":
+        return "primary";
+      case "page":
+        return "secondary";
+      case "news":
+        return "info";
+      case "announcement":
+        return "warning";
       default:
-        return 'default';
+        return "default";
     }
   };
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
+      >
         <Typography variant="h4">Quản lý nội dung</Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => navigate('/content/new')}
+          onClick={() => navigate("/content/new")}
         >
           Thêm nội dung
         </Button>
       </Box>
 
       <Paper sx={{ mb: 2, p: 2 }}>
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
           <FormControl size="small" sx={{ minWidth: 120 }}>
             <InputLabel>Loại</InputLabel>
             <Select
@@ -152,7 +158,9 @@ export default function ContentList() {
             <Select
               value={filters.status}
               label="Trạng thái"
-              onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+              onChange={(e) =>
+                setFilters({ ...filters, status: e.target.value })
+              }
             >
               <MenuItem value="">Tất cả</MenuItem>
               <MenuItem value="draft">Bản nháp</MenuItem>
@@ -165,7 +173,9 @@ export default function ContentList() {
             <Select
               value={filters.locale}
               label="Ngôn ngữ"
-              onChange={(e) => setFilters({ ...filters, locale: e.target.value })}
+              onChange={(e) =>
+                setFilters({ ...filters, locale: e.target.value })
+              }
             >
               <MenuItem value="">Tất cả</MenuItem>
               <MenuItem value="jp">Tiếng Nhật</MenuItem>
@@ -206,7 +216,11 @@ export default function ContentList() {
                 <TableRow key={content.id} hover>
                   <TableCell>{content.title}</TableCell>
                   <TableCell>
-                    <Chip label={content.type} size="small" color={getTypeColor(content.type)} />
+                    <Chip
+                      label={content.type}
+                      size="small"
+                      color={getTypeColor(content.type)}
+                    />
                   </TableCell>
                   <TableCell>
                     <Chip
@@ -216,7 +230,7 @@ export default function ContentList() {
                     />
                   </TableCell>
                   <TableCell>{content.locale.toUpperCase()}</TableCell>
-                  <TableCell>{content.author?.email || 'Unknown'}</TableCell>
+                  <TableCell>{content.author?.email || "Unknown"}</TableCell>
                   <TableCell>
                     {new Date(content.updatedAt).toLocaleDateString()}
                   </TableCell>
@@ -247,7 +261,11 @@ export default function ContentList() {
         />
       </TableContainer>
 
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
         <MenuItem
           onClick={() => {
             if (selectedId) navigate(`/content/${selectedId}`);
@@ -269,4 +287,3 @@ export default function ContentList() {
     </Box>
   );
 }
-

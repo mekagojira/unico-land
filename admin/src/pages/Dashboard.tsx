@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Grid, Paper, Typography, Box, Card, CardContent } from '@mui/material';
+import { useEffect, useState } from "react";
+import { Paper, Typography, Box, Card, CardContent } from "@mui/material";
 import {
   Article as ArticleIcon,
   Publish as PublishIcon,
   EditNote as DraftIcon,
   Archive as ArchiveIcon,
-} from '@mui/icons-material';
-import { contentAPI, Content } from '../services/api';
+} from "@mui/icons-material";
+import { contentAPI, Content } from "../services/api";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -15,16 +15,16 @@ export default function Dashboard() {
     draft: 0,
     archived: 0,
   });
-  const [loading, setLoading] = useState(true);
+  const [_, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const [all, published, draft, archived] = await Promise.all([
           contentAPI.getAll({ limit: 1 }),
-          contentAPI.getAll({ status: 'published', limit: 1 }),
-          contentAPI.getAll({ status: 'draft', limit: 1 }),
-          contentAPI.getAll({ status: 'archived', limit: 1 }),
+          contentAPI.getAll({ status: "published", limit: 1 }),
+          contentAPI.getAll({ status: "draft", limit: 1 }),
+          contentAPI.getAll({ status: "archived", limit: 1 }),
         ]);
 
         setStats({
@@ -34,7 +34,7 @@ export default function Dashboard() {
           archived: archived.pagination.total,
         });
       } catch (error) {
-        console.error('Failed to fetch stats:', error);
+        console.error("Failed to fetch stats:", error);
       } finally {
         setLoading(false);
       }
@@ -44,10 +44,30 @@ export default function Dashboard() {
   }, []);
 
   const statCards = [
-    { title: 'Tổng nội dung', value: stats.total, icon: <ArticleIcon />, color: '#1976d2' },
-    { title: 'Đã xuất bản', value: stats.published, icon: <PublishIcon />, color: '#2e7d32' },
-    { title: 'Bản nháp', value: stats.draft, icon: <DraftIcon />, color: '#ed6c02' },
-    { title: 'Đã lưu trữ', value: stats.archived, icon: <ArchiveIcon />, color: '#d32f2f' },
+    {
+      title: "Tổng nội dung",
+      value: stats.total,
+      icon: <ArticleIcon />,
+      color: "#1976d2",
+    },
+    {
+      title: "Đã xuất bản",
+      value: stats.published,
+      icon: <PublishIcon />,
+      color: "#2e7d32",
+    },
+    {
+      title: "Bản nháp",
+      value: stats.draft,
+      icon: <DraftIcon />,
+      color: "#ed6c02",
+    },
+    {
+      title: "Đã lưu trữ",
+      value: stats.archived,
+      icon: <ArchiveIcon />,
+      color: "#d32f2f",
+    },
   ];
 
   return (
@@ -59,34 +79,41 @@ export default function Dashboard() {
         Chào mừng đến với Bảng quản trị Uni-Co
       </Typography>
 
-      <Grid container spacing={3}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(4, 1fr)",
+          },
+          gap: 3,
+        }}
+      >
         {statCards.map((stat) => (
-          <Grid item xs={12} sm={6} md={3} key={stat.title}>
-            <Card>
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <Box
-                    sx={{
-                      p: 1,
-                      borderRadius: 1,
-                      bgcolor: `${stat.color}20`,
-                      color: stat.color,
-                      mr: 2,
-                    }}
-                  >
-                    {stat.icon}
-                  </Box>
-                  <Typography variant="h4">{stat.value}</Typography>
+          <Card key={stat.title}>
+            <CardContent>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                <Box
+                  sx={{
+                    p: 1,
+                    borderRadius: 1,
+                    bgcolor: `${stat.color}20`,
+                    color: stat.color,
+                    mr: 2,
+                  }}
+                >
+                  {stat.icon}
                 </Box>
-                <Typography variant="body2" color="text.secondary">
-                  {stat.title}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+                <Typography variant="h4">{stat.value}</Typography>
+              </Box>
+              <Typography variant="body2" color="text.secondary">
+                {stat.title}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }
-

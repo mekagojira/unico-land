@@ -1,0 +1,12 @@
+{
+  "/[locale]/company/page": "/[locale]/company",
+  "/[locale]/contact/page": "/[locale]/contact",
+  "/[locale]/foreign-support/page": "/[locale]/foreign-support",
+  "/[locale]/page": "/[locale]",
+  "/[locale]/plan/[id]/page": "/[locale]/plan/[id]",
+  "/[locale]/service/[id]/page": "/[locale]/service/[id]",
+  "/[locale]/service/page": "/[locale]/service",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico"
+}

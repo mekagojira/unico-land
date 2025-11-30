@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -16,14 +16,15 @@ import {
   Typography,
   Chip,
   Switch,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Add as AddIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
   MoreVert as MoreVertIcon,
-} from '@mui/icons-material';
-import { servicesAPI, Service } from '../services/api';
+} from "@mui/icons-material";
+import { servicesAPI } from "../services/api";
+import type { Service } from "../services/api";
 
 export default function ServicesList() {
   const [services, setServices] = useState<Service[]>([]);
@@ -38,7 +39,7 @@ export default function ServicesList() {
       const response = await servicesAPI.getAll();
       setServices(response.data);
     } catch (error) {
-      console.error('Failed to fetch services:', error);
+      console.error("Failed to fetch services:", error);
     } finally {
       setLoading(false);
     }
@@ -49,13 +50,13 @@ export default function ServicesList() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Bạn có chắc chắn muốn xóa dịch vụ này?')) {
+    if (window.confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
       try {
         await servicesAPI.delete(id);
         fetchServices();
       } catch (error) {
-        console.error('Failed to delete service:', error);
-        alert('Xóa dịch vụ thất bại');
+        console.error("Failed to delete service:", error);
+        alert("Xóa dịch vụ thất bại");
       }
     }
     handleMenuClose();
@@ -69,8 +70,8 @@ export default function ServicesList() {
       });
       fetchServices();
     } catch (error) {
-      console.error('Failed to update service:', error);
-      alert('Cập nhật dịch vụ thất bại');
+      console.error("Failed to update service:", error);
+      alert("Cập nhật dịch vụ thất bại");
     }
   };
 
@@ -86,12 +87,19 @@ export default function ServicesList() {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
+      >
         <Typography variant="h4">Quản lý dịch vụ</Typography>
         <Button
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => navigate('/services/new')}
+          onClick={() => navigate("/services/new")}
         >
           Thêm dịch vụ
         </Button>
@@ -159,7 +167,11 @@ export default function ServicesList() {
         </Table>
       </TableContainer>
 
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
         <MenuItem
           onClick={() => {
             if (selectedId) navigate(`/services/${selectedId}`);
@@ -181,4 +193,3 @@ export default function ServicesList() {
     </Box>
   );
 }
-

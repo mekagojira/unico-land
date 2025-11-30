@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Box,
   Paper,
@@ -10,16 +10,16 @@ import {
   Card,
   CardContent,
   Stack,
-} from '@mui/material';
-import { 
+} from "@mui/material";
+import {
   Save as SaveIcon,
   Business as BusinessIcon,
   LocationOn as LocationIcon,
   ContactMail as ContactIcon,
   Description as DescriptionIcon,
-} from '@mui/icons-material';
-import { companyAPI, CompanyInfo } from '../services/api';
-import ImageUpload from '../components/ImageUpload';
+} from "@mui/icons-material";
+import { companyAPI, CompanyInfo } from "../services/api";
+import ImageUpload from "../components/ImageUpload";
 
 export default function CompanyInfoPage() {
   const [company, setCompany] = useState<CompanyInfo | null>(null);
@@ -39,7 +39,7 @@ export default function CompanyInfoPage() {
       const response = await companyAPI.get();
       setCompany(response.data);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Tải thông tin công ty thất bại');
+      setError(err.response?.data?.message || "Tải thông tin công ty thất bại");
     } finally {
       setLoading(false);
     }
@@ -64,7 +64,9 @@ export default function CompanyInfoPage() {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Cập nhật thông tin công ty thất bại');
+      setError(
+        err.response?.data?.message || "Cập nhật thông tin công ty thất bại"
+      );
     } finally {
       setSaving(false);
     }
@@ -72,7 +74,14 @@ export default function CompanyInfoPage() {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: 400,
+        }}
+      >
         <CircularProgress />
       </Box>
     );
@@ -87,7 +96,7 @@ export default function CompanyInfoPage() {
   }
 
   return (
-    <Box sx={{ maxWidth: 1400, mx: 'auto' }}>
+    <Box sx={{ maxWidth: 1400, mx: "auto" }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" sx={{ fontWeight: 600, mb: 2 }}>
@@ -95,9 +104,9 @@ export default function CompanyInfoPage() {
         </Typography>
 
         {error && (
-          <Alert 
-            severity="error" 
-            sx={{ mb: 2, borderRadius: 2 }} 
+          <Alert
+            severity="error"
+            sx={{ mb: 2, borderRadius: 2 }}
             onClose={() => setError(null)}
           >
             {error}
@@ -105,9 +114,9 @@ export default function CompanyInfoPage() {
         )}
 
         {success && (
-          <Alert 
-            severity="success" 
-            sx={{ mb: 2, borderRadius: 2 }} 
+          <Alert
+            severity="success"
+            sx={{ mb: 2, borderRadius: 2 }}
             onClose={() => setSuccess(false)}
           >
             Cập nhật thông tin công ty thành công!
@@ -119,8 +128,17 @@ export default function CompanyInfoPage() {
         <Stack spacing={3}>
           {/* Company Information */}
           <Box>
-            <Card elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-              <Box sx={{ bgcolor: 'primary.main', color: 'white', p: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Card elevation={2} sx={{ borderRadius: 3, overflow: "hidden" }}>
+              <Box
+                sx={{
+                  bgcolor: "primary.main",
+                  color: "white",
+                  p: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
                 <BusinessIcon />
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Thông tin công ty
@@ -132,50 +150,56 @@ export default function CompanyInfoPage() {
                     fullWidth
                     label="Tên công ty (JP)"
                     value={company.name}
-                    onChange={(e) => handleChange('name', e.target.value)}
+                    onChange={(e) => handleChange("name", e.target.value)}
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Tên công ty (EN)"
                     value={company.nameEn}
-                    onChange={(e) => handleChange('nameEn', e.target.value)}
+                    onChange={(e) => handleChange("nameEn", e.target.value)}
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Thành lập"
                     value={company.established}
-                    onChange={(e) => handleChange('established', e.target.value)}
+                    onChange={(e) =>
+                      handleChange("established", e.target.value)
+                    }
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Người đại diện"
                     value={company.representative}
-                    onChange={(e) => handleChange('representative', e.target.value)}
+                    onChange={(e) =>
+                      handleChange("representative", e.target.value)
+                    }
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Giấy phép"
                     value={company.license}
-                    onChange={(e) => handleChange('license', e.target.value)}
+                    onChange={(e) => handleChange("license", e.target.value)}
                     required
                     multiline
                     rows={2}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Tổ chức"
-                    value={company.organization || ''}
-                    onChange={(e) => handleChange('organization', e.target.value)}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    value={company.organization || ""}
+                    onChange={(e) =>
+                      handleChange("organization", e.target.value)
+                    }
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                 </Stack>
               </CardContent>
@@ -184,8 +208,17 @@ export default function CompanyInfoPage() {
 
           {/* Address Information */}
           <Box>
-            <Card elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-              <Box sx={{ bgcolor: 'success.main', color: 'white', p: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Card elevation={2} sx={{ borderRadius: 3, overflow: "hidden" }}>
+              <Box
+                sx={{
+                  bgcolor: "success.main",
+                  color: "white",
+                  p: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
                 <LocationIcon />
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Địa chỉ
@@ -197,16 +230,16 @@ export default function CompanyInfoPage() {
                     fullWidth
                     label="Địa chỉ"
                     value={company.address}
-                    onChange={(e) => handleChange('address', e.target.value)}
+                    onChange={(e) => handleChange("address", e.target.value)}
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Địa chỉ 2"
-                    value={company.address2 || ''}
-                    onChange={(e) => handleChange('address2', e.target.value)}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    value={company.address2 || ""}
+                    onChange={(e) => handleChange("address2", e.target.value)}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                 </Stack>
               </CardContent>
@@ -215,8 +248,17 @@ export default function CompanyInfoPage() {
 
           {/* Contact Information */}
           <Box>
-            <Card elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-              <Box sx={{ bgcolor: 'warning.main', color: 'white', p: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Card elevation={2} sx={{ borderRadius: 3, overflow: "hidden" }}>
+              <Box
+                sx={{
+                  bgcolor: "warning.main",
+                  color: "white",
+                  p: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
                 <ContactIcon />
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Thông tin liên hệ
@@ -228,45 +270,49 @@ export default function CompanyInfoPage() {
                     fullWidth
                     label="Điện thoại"
                     value={company.phone}
-                    onChange={(e) => handleChange('phone', e.target.value)}
+                    onChange={(e) => handleChange("phone", e.target.value)}
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Email"
                     value={company.email}
-                    onChange={(e) => handleChange('email', e.target.value)}
+                    onChange={(e) => handleChange("email", e.target.value)}
                     type="email"
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Giờ làm việc"
                     value={company.hours}
-                    onChange={(e) => handleChange('hours', e.target.value)}
+                    onChange={(e) => handleChange("hours", e.target.value)}
                     required
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Ngày nghỉ"
-                    value={company.closed || ''}
-                    onChange={(e) => handleChange('closed', e.target.value)}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    value={company.closed || ""}
+                    onChange={(e) => handleChange("closed", e.target.value)}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <Box>
-                    <Typography variant="subtitle2" sx={{ mb: 1.5, fontWeight: 600, color: 'text.secondary' }}>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ mb: 1.5, fontWeight: 600, color: "text.secondary" }}
+                    >
                       Logo công ty
                     </Typography>
                     <ImageUpload
                       value={company.logoUrl ? [company.logoUrl] : []}
-                      onChange={(keys) => handleChange('logoUrl', keys[0] || '')}
+                      onChange={(keys) =>
+                        handleChange("logoUrl", keys[0] || "")
+                      }
                       displayUrls={company.logoUrl ? [company.logoUrl] : []} // Pass logoUrl as displayUrl (comes as presigned URL from GET API)
                       multiple={false}
                       folder="company"
-                      multiple={false}
                       label=""
                     />
                   </Box>
@@ -277,8 +323,17 @@ export default function CompanyInfoPage() {
 
           {/* Description Section */}
           <Box>
-            <Card elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-              <Box sx={{ bgcolor: 'info.main', color: 'white', p: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Card elevation={2} sx={{ borderRadius: 3, overflow: "hidden" }}>
+              <Box
+                sx={{
+                  bgcolor: "info.main",
+                  color: "white",
+                  p: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
                 <DescriptionIcon />
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Mô tả & Lời chào
@@ -289,20 +344,22 @@ export default function CompanyInfoPage() {
                   <TextField
                     fullWidth
                     label="Lời chào"
-                    value={company.greeting || ''}
-                    onChange={(e) => handleChange('greeting', e.target.value)}
+                    value={company.greeting || ""}
+                    onChange={(e) => handleChange("greeting", e.target.value)}
                     multiline
                     rows={2}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <TextField
                     fullWidth
                     label="Mô tả"
-                    value={company.description || ''}
-                    onChange={(e) => handleChange('description', e.target.value)}
+                    value={company.description || ""}
+                    onChange={(e) =>
+                      handleChange("description", e.target.value)
+                    }
                     multiline
                     rows={4}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                 </Stack>
               </CardContent>
@@ -311,26 +368,32 @@ export default function CompanyInfoPage() {
 
           {/* Action Buttons */}
           <Box>
-            <Paper 
-              elevation={0} 
-              sx={{ 
-                p: 3, 
-                bgcolor: 'grey.50', 
+            <Paper
+              elevation={0}
+              sx={{
+                p: 3,
+                bgcolor: "grey.50",
                 borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'divider'
+                border: "1px solid",
+                borderColor: "divider",
               }}
             >
               <Stack direction="row" spacing={2} justifyContent="flex-end">
                 <Button
                   type="submit"
                   variant="contained"
-                  startIcon={saving ? <CircularProgress size={20} color="inherit" /> : <SaveIcon />}
+                  startIcon={
+                    saving ? (
+                      <CircularProgress size={20} color="inherit" />
+                    ) : (
+                      <SaveIcon />
+                    )
+                  }
                   disabled={saving}
                   size="large"
                   sx={{ borderRadius: 2, minWidth: 150, px: 4 }}
                 >
-                  {saving ? 'Đang lưu...' : 'Lưu thay đổi'}
+                  {saving ? "Đang lưu..." : "Lưu thay đổi"}
                 </Button>
               </Stack>
             </Paper>
@@ -340,4 +403,3 @@ export default function CompanyInfoPage() {
     </Box>
   );
 }
-
