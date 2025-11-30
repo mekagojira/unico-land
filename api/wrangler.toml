@@ -1,0 +1,43 @@
+name = "unico-land-api"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+account_id = "aaf162b2efd6cd5cf6644ecb892b89c3"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "unico-land"
+database_id = "b7b01265-4d55-4261-809c-6a19626c9e0f"
+
+# R2 bucket binding
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "unico-land"
+
+# Environment variables (use wrangler secret put for sensitive values)
+[vars]
+R2_PUBLIC_URL = "https://s3.uni-co-group.com"
+CORS_ORIGIN = "*"
+
+# Production environment
+[env.production]
+vars = { NODE_ENV = "production" }
+
+# Development environment
+[env.development]
+vars = { NODE_ENV = "development" }
+
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1

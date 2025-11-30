@@ -1,0 +1,8 @@
+[install]
+# Use faster package installation
+auto = true
+
+[test]
+# Test configuration
+timeout = 30000
+

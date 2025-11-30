@@ -1,36 +1,25 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import type { Service } from '@/lib/api';
 
 interface ServiceDetailProps {
   serviceId: string;
+  service?: Service | null;
+  locale?: string;
 }
 
-export default function ServiceDetail({ serviceId }: ServiceDetailProps) {
+export default function ServiceDetail({ serviceId, service, locale = 'jp' }: ServiceDetailProps) {
   const t = useTranslations('services');
   const serviceT = useTranslations(`services.${serviceId}`);
 
-  const serviceImages = {
-    sales: [
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=90',
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=90',
-      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&q=90',
-    ],
-    rental: [
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=90',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=90', 
-    ],
-    management: [ 
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=90',
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=90',
-    ],
-    foreignSupport: [
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=90',
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=90',
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=90',
-    ],
-  };
+  // Only use service images from API - no fallback
+  const images = (service?.images && service.images.length > 0) 
+    ? service.images 
+    : [];
 
-  const images = serviceImages[serviceId as keyof typeof serviceImages] || serviceImages.sales;
+  const title = service?.title || serviceT('title');
+  const description = service?.description || serviceT('description');
+  const content = service?.content || description;
 
   return (
     <section className="pt-32 pb-24 md:pt-40 md:pb-32 bg-white relative overflow-hidden">
@@ -46,58 +35,64 @@ export default function ServiceDetail({ serviceId }: ServiceDetailProps) {
             <span className="text-xs font-medium text-blue-700 tracking-[0.2em] uppercase">{t('badge')}</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extralight text-gray-900 mb-6 tracking-tighter leading-[1.05]">
-            {serviceT('title')}
+            {title}
           </h1>
           <div className="w-40 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
-            {serviceT('description')}
+            {description}
           </p>
         </div>
 
         {/* Hero Image */}
-        <div className="mb-20 rounded-3xl overflow-hidden shadow-2xl">
-          <div className="relative aspect-[21/9]">
-            <Image
-              src={images[0]}
-              alt={serviceT('title')}
-              fill
-              className="object-cover"
-              quality={95}
-              priority
-              sizes="100vw"
-              unoptimized={images[0].includes('unsplash.com')}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        {images.length > 0 && (
+          <div className="mb-20 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-[21/9]">
+              <Image
+                src={images[0]}
+                alt={title}
+                fill
+                className="object-cover"
+                quality={95}
+                priority
+                sizes="100vw"
+                unoptimized={images[0].includes('unsplash.com') || images[0].includes('r2.cloudflarestorage.com')}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Image Gallery */}
-        <div className="grid md:grid-cols-2 gap-6 mb-20">
-          {images.slice(1).map((image, index) => (
-            <div key={index} className="rounded-2xl overflow-hidden shadow-xl group">
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={image}
-                  alt={`${serviceT('title')} - ${index + 2}`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  quality={90}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  unoptimized={image.includes('unsplash.com')}
-                />
+        {images.length > 1 && (
+          <div className="grid md:grid-cols-2 gap-6 mb-20">
+            {images.slice(1).map((image, index) => (
+              <div key={index} className="rounded-2xl overflow-hidden shadow-xl group">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={image}
+                    alt={`${title} - ${index + 2}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    quality={90}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized={image.includes('unsplash.com') || image.includes('r2.cloudflarestorage.com')}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Service Details */}
-        <div className="bg-gradient-to-br from-blue-50/50 via-white to-stone-50/30 rounded-3xl border border-blue-100/50 p-12 md:p-16 mb-16">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light">
-              {serviceT('description')}
-            </p>
+        {content && (
+          <div className="bg-gradient-to-br from-blue-50/50 via-white to-stone-50/30 rounded-3xl border border-blue-100/50 p-12 md:p-16 mb-16">
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light whitespace-pre-line">
+                {content}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* CTA Section */}
         <div className="text-center">

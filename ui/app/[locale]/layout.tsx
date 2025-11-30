@@ -39,11 +39,12 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${notoSansJP.variable} antialiased ${
           locale === 'jp' ? 'font-zen-kaku' : 'font-inter'
         }`}
+        suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
           {children}

@@ -1,6 +1,12 @@
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import type { CompanyInfo } from '@/lib/api';
 
-export default function Company() {
+interface CompanyProps {
+  companyInfo?: CompanyInfo | null;
+}
+
+export default function Company({ companyInfo }: CompanyProps) {
   const t = useTranslations('company');
 
   return (
@@ -31,18 +37,14 @@ export default function Company() {
               </svg>
             </div>
             <h2 className="text-3xl md:text-4xl font-extralight text-gray-900 mb-8 tracking-tight leading-relaxed">
-              {t('greeting')}
+              {companyInfo?.greeting || t('greeting')}
             </h2>
             <div className="prose prose-lg max-w-none">
-              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light mb-6">
-                {t('introduction1')}
-              </p>
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light mb-6">
-                {t('introduction2')}
-              </p>
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
-                {t('introduction3')}
-              </p>
+              {companyInfo?.description && (
+                <p className="text-xl md:text-2xl text-gray-700 leading-relaxed font-light mb-6">
+                  {companyInfo.description}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -52,8 +54,24 @@ export default function Company() {
           <div className="space-y-10">
             {/* Company Name */}
             <div className="text-center pb-10 border-b border-gray-200">
-              <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-3 tracking-tight">{t('companyName')}</h2>
-              <p className="text-xl text-gray-500 font-light tracking-wide">{t('companyNameEn')}</p>
+              {companyInfo?.logoUrl && (
+                <div className="mb-6 flex justify-center">
+                  <Image
+                    src={companyInfo.logoUrl}
+                    alt={companyInfo.name || t('companyName')}
+                    width={200}
+                    height={67}
+                    className="h-16 w-auto object-contain"
+                    unoptimized
+                  />
+                </div>
+              )}
+              <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-3 tracking-tight">
+                {companyInfo?.name || t('companyName')}
+              </h2>
+              <p className="text-xl text-gray-500 font-light tracking-wide">
+                {companyInfo?.nameEn || t('companyNameEn')}
+              </p>
             </div>
 
             {/* Basic Information */}
@@ -63,9 +81,19 @@ export default function Company() {
                   {t('addressLabel')}
                 </h3>
                 <p className="text-lg text-gray-900 leading-relaxed font-light">
-                  {t('address')}
-                  <br />
-                  {t('address2')}
+                  {companyInfo?.address || t('address')}
+                  {companyInfo?.address2 && (
+                    <>
+                      <br />
+                      {companyInfo.address2}
+                    </>
+                  )}
+                  {!companyInfo?.address2 && t('address2') && (
+                    <>
+                      <br />
+                      {t('address2')}
+                    </>
+                  )}
                 </p>
               </div>
 
@@ -73,31 +101,41 @@ export default function Company() {
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
                   {t('establishedLabel')}
                 </h3>
-                <p className="text-lg text-gray-900 font-light">{t('established')}</p>
+                <p className="text-lg text-gray-900 font-light">
+                  {companyInfo?.established || t('established')}
+                </p>
               </div>
 
               <div className="space-y-1">
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
                   {t('representativeLabel')}
                 </h3>
-                <p className="text-lg text-gray-900 font-light">{t('representative')}</p>
+                <p className="text-lg text-gray-900 font-light">
+                  {companyInfo?.representative || t('representative')}
+                </p>
               </div>
 
               <div className="space-y-1">
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
                   {t('licenseLabel')}
                 </h3>
-                <p className="text-base text-gray-900 leading-relaxed font-light">{t('license')}</p>
+                <p className="text-base text-gray-900 leading-relaxed font-light">
+                  {companyInfo?.license || t('license')}
+                </p>
               </div>
             </div>
 
             {/* Organization */}
-            <div className="pt-10 border-t border-gray-200">
-              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
-                {t('organizationLabel')}
-              </h3>
-              <p className="text-lg text-gray-900 font-light">{t('organization')}</p>
-            </div>
+            {(companyInfo?.organization || t('organization')) && (
+              <div className="pt-10 border-t border-gray-200">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
+                  {t('organizationLabel')}
+                </h3>
+                <p className="text-lg text-gray-900 font-light">
+                  {companyInfo?.organization || t('organization')}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -152,8 +190,11 @@ export default function Company() {
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
                   {t('phoneLabel')}
                 </h3>
-                <a href={`tel:${t('phone')}`} className="text-3xl font-light hover:text-blue-400 transition-colors">
-                  {t('phone')}
+                <a 
+                  href={`tel:${companyInfo?.phone || t('phone')}`} 
+                  className="text-3xl font-light hover:text-blue-400 transition-colors"
+                >
+                  {companyInfo?.phone || t('phone')}
                 </a>
               </div>
               <div>
@@ -161,23 +202,23 @@ export default function Company() {
                   {t('emailLabel')}
                 </h3>
                 <a
-                  href={`mailto:${t('email')}`}
+                  href={`mailto:${companyInfo?.email || t('email')}`}
                   className="text-3xl font-light text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                  {t('email')}
+                  {companyInfo?.email || t('email')}
                 </a>
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
                   {t('hoursLabel')}
                 </h3>
-                <p className="text-2xl font-light">{t('hours')}</p>
+                <p className="text-2xl font-light">{companyInfo?.hours || t('hours')}</p>
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
                   {t('closedLabel')}
                 </h3>
-                <p className="text-2xl font-light">{t('closed')}</p>
+                <p className="text-2xl font-light">{companyInfo?.closed || t('closed')}</p>
               </div>
             </div>
           </div>
