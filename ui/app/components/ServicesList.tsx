@@ -17,7 +17,6 @@ export default function ServicesList({ services = [] }: ServicesListProps) {
     id: service.id,
     title: service.title,
     description: service.description,
-    icon: service.icon || "",
     image: service.images && service.images.length > 0 ? service.images[0] : "",
   }));
 
@@ -76,15 +75,6 @@ export default function ServicesList({ services = [] }: ServicesListProps) {
                       }
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-
-                    {/* Icon overlay */}
-                    {service.icon && (
-                      <div className="absolute top-6 left-6 z-20">
-                        <div className="text-5xl md:text-6xl transform group-hover:scale-110 transition-transform duration-500">
-                          {service.icon}
-                        </div>
-                      </div>
-                    )}
                   </div>
                 )}
 

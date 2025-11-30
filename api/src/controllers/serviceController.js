@@ -58,7 +58,6 @@ export const getAllServices = async (c) => {
             contentJp: service.contentJp || "",
             contentVi: service.contentVi || "",
             images: presignedImages,
-            icon: service.icon || "",
             orderIndex: service.orderIndex || 0,
             isActive: service.isActive !== undefined ? service.isActive : 1,
             createdAt: service.createdAt,

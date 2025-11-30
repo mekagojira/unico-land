@@ -149,7 +149,6 @@ export class Service extends BaseModel {
       contentJp: this.contentJp || "",
       contentVi: this.contentVi || "",
       images: images,
-      icon: this.icon || "",
       orderIndex: this.orderIndex || 0,
       isActive: this.isActive !== undefined ? this.isActive : 1,
       createdAt: this.createdAt,

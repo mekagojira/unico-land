@@ -102,7 +102,6 @@ export default function ServicesList() {
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Biểu tượng</TableCell>
               <TableCell>Tiêu đề (JP)</TableCell>
               <TableCell>Tiêu đề (VI)</TableCell>
               <TableCell>Thứ tự</TableCell>
@@ -114,13 +113,13 @@ export default function ServicesList() {
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={8} align="center">
+                <TableCell colSpan={7} align="center">
                   Đang tải...
                 </TableCell>
               </TableRow>
             ) : services.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} align="center">
+                <TableCell colSpan={7} align="center">
                   Không tìm thấy dịch vụ
                 </TableCell>
               </TableRow>
@@ -131,9 +130,6 @@ export default function ServicesList() {
                   <TableRow key={service.id} hover>
                     <TableCell>
                       <Chip label={service.id} size="small" />
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="h5">{service.icon || '—'}</Typography>
                     </TableCell>
                     <TableCell>{service.titleJp}</TableCell>
                     <TableCell>{service.titleVi}</TableCell>

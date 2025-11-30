@@ -48,7 +48,6 @@ export interface Service {
   contentJp?: string;
   contentVi?: string;
   images: string[];
-  icon?: string;
   orderIndex: number;
   isActive: number;
   createdAt: string;

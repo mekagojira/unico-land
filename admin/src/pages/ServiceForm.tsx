@@ -42,7 +42,6 @@ export default function ServiceForm() {
     contentJp: "",
     contentVi: "",
     images: [],
-    icon: "",
     orderIndex: 0,
     isActive: 1,
   });
@@ -229,14 +228,6 @@ export default function ServiceForm() {
                     required
                     disabled={isEdit}
                     helperText="VD: sales, rental, management, foreignSupport"
-                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
-                  />
-                  <TextField
-                    fullWidth
-                    label="Biểu tượng (Emoji)"
-                    value={service.icon || ""}
-                    onChange={(e) => handleChange("icon", e.target.value)}
-                    placeholder="🏛️"
                     sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
                   />
                   <FormControl
