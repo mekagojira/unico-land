@@ -1,3 +1,0 @@
-module.exports=[33290,a=>{"use strict";var b=a.i(11884);function c({children:a}){return a}function d(){return b.routing.locales.map(a=>({locale:a}))}a.s(["default",()=>c,"generateStaticParams",()=>d])},24378,a=>{a.v(b=>Promise.all(["server/chunks/ssr/messages_jp_json_a7f833f0._.js"].map(b=>a.l(b))).then(()=>b(51040)))},90724,a=>{a.v(b=>Promise.all(["server/chunks/ssr/messages_vi_json_f8b416d8._.js"].map(b=>a.l(b))).then(()=>b(41546)))}];
-
-//# sourceMappingURL=_34bebabf._.js.map

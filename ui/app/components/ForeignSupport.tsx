@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function ForeignSupport() {
   const t = useTranslations('foreignSupport');
@@ -88,7 +89,7 @@ export default function ForeignSupport() {
 
         {/* CTA Section */}
         <div className="text-center mt-16">
-          <a
+          <Link
             href="/contact"
             className="inline-flex items-center justify-center px-12 py-6 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white font-medium rounded-lg hover:from-blue-900 hover:via-blue-800 hover:to-blue-700 transition-all duration-500 transform hover:scale-[1.02] shadow-2xl hover:shadow-blue-900/30 tracking-wide"
           >
@@ -96,7 +97,7 @@ export default function ForeignSupport() {
             <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
