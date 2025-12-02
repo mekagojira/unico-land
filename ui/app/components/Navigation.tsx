@@ -42,19 +42,15 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200/30 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-xl border-b border-gray-200/30 shadow-sm">
+        <div className="max-w-7xl mx-auto py-4 px-6 lg:px-8">
+          <div className="flex items-center justify-between">
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center">
-                <Image
+                <img 
                   src="https://svc.uni-co-jinzai.com/api/image/1710811080191916f93c44cef41299b052827fa8582f1.png"
-                  alt="Uni-Co 株式会社"
-                  width={180}
-                  height={60}
-                  className="h-12 w-auto object-contain"
-                  priority
-                  unoptimized
+                  alt="Uni-Co 株式会社" 
+                  className="h-12 w-auto object-contain" 
                 />
               </Link>
             </div>
@@ -135,14 +131,10 @@ export default function Navigation() {
           {/* Sidebar Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-              <Image
+              <img
                 src="https://svc.uni-co-jinzai.com/api/image/1710811080191916f93c44cef41299b052827fa8582f1.png"
-                alt="Uni-Co 株式会社"
-                width={140}
-                height={50}
-                className="h-10 w-auto object-contain"
-                priority
-                unoptimized
+                alt="Uni-Co" 
+                className="h-10 w-auto object-contain" 
               />
             </Link>
             <button

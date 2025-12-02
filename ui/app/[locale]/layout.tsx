@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Inter } from "next/font/google";
 import { Noto_Sans_JP } from "next/font/google";
+import type { Metadata } from 'next';
 import "../globals.css";
 
 const inter = Inter({
@@ -18,6 +19,12 @@ const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  icons: {
+    icon: '/logo.ico',
+  },
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

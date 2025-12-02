@@ -105,6 +105,16 @@ export default function Footer({ companyInfo }: FooterProps) {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="https://uni-co-group.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-400 transition-colors font-light"
+                >
+                  {t("companyWebsite")}
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -159,7 +169,16 @@ export default function Footer({ companyInfo }: FooterProps) {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-500 font-light">{t("copyright")}</p>
-            <div className="text-sm text-gray-500 font-light">
+            <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-gray-500 font-light">
+              <a
+                href="https://uni-co-group.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400 transition-colors font-light"
+              >
+                {t("companyWebsite")}
+              </a>
+              <span className="hidden md:inline">|</span>
               <span>{t("tagline")}</span>
             </div>
           </div>
