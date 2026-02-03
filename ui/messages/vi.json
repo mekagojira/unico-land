@@ -120,6 +120,9 @@
     "imagePlaceholder": "Hình ảnh blog",
     "readMore": "Đọc thêm",
     "viewAll": "Xem tất cả blog",
+    "noPosts": "Chưa có bài viết nào.",
+    "backToBlog": "Quay lại danh sách blog",
+    "publishedAt": "Ngày đăng",
     "posts": {
       "post1": {
         "title": "Hướng dẫn vay mua nhà cho người nước ngoài",

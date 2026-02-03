@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --color-primary: #b45309;
+  --color-primary-hover: #92400e;
+  --color-primary-light: #fef3c7;
+  --color-muted: #78716c;
+  --radius: 1rem;
+  --radius-lg: 1.5rem;
 }
 
 @theme inline {
@@ -22,99 +28,82 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 .font-zen-kaku {
-  font-family: var(--font-zen-kaku), 'Zen Kaku Gothic New', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'Noto Sans JP', sans-serif;
+  font-family: var(--font-zen-kaku), "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
 .font-inter {
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Add Zen Kaku Gothic New via CSS if available */
 @font-face {
-  font-family: 'Zen Kaku Gothic New';
+  font-family: "Zen Kaku Gothic New";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/ZenKakuGothicNew-Regular.woff2') format('woff2');
+  src: url("/fonts/ZenKakuGothicNew-Regular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Zen Kaku Gothic New';
+  font-family: "Zen Kaku Gothic New";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('/fonts/ZenKakuGothicNew-Medium.woff2') format('woff2');
+  src: url("/fonts/ZenKakuGothicNew-Medium.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Zen Kaku Gothic New';
+  font-family: "Zen Kaku Gothic New";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/ZenKakuGothicNew-Bold.woff2') format('woff2');
+  src: url("/fonts/ZenKakuGothicNew-Bold.woff2") format("woff2");
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Luxury typography enhancements */
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   font-weight: 300;
 }
 
+/* Enterprise focus ring */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:ring-offset-2;
+}
+
 /* Blob animation */
 @keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
 
 .animate-blob {
   animation: blob 7s infinite;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
 
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-/* Shimmer animation for loading screen */
 @keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
 
-/* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -122,37 +111,230 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-/* Luxury scrollbar */
+/* Enterprise scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fafafa;
+  background: #fafaf9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #d4a574 0%, #b8945f 100%);
-  border-radius: 6px;
-  border: 2px solid #fafafa;
+  background: linear-gradient(180deg, #d97706 0%, #b45309 100%);
+  border-radius: 5px;
+  border: 2px solid #fafaf9;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #b8945f 0%, #9a7d4a 100%);
+  background: linear-gradient(180deg, #b45309 0%, #92400e 100%);
 }
 
-/* Gradient radial utility */
 .bg-gradient-radial {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
-/* Selection color */
 ::selection {
-  background-color: #d4a574;
+  background-color: #d97706;
   color: white;
 }
 
 ::-moz-selection {
-  background-color: #d4a574;
+  background-color: #d97706;
   color: white;
+}
+
+/* Subtle enterprise grid pattern */
+.pattern-grid {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath fill='%23000000' fill-opacity='0.02' d='M0 0h60v60H0z'/%3E%3Cpath stroke='%23000000' stroke-opacity='0.03' d='M0 30h60M30 0v60'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Premium card hover lift */
+.hover-lift {
+  @apply transition-all duration-300;
+}
+.hover-lift:hover {
+  @apply -translate-y-1 shadow-xl;
+}
+
+/* ========== Scroll / entrance animations ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes lineExpand {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Entrance animation classes (use with .animate-on-view) */
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2.5s ease-in-out infinite;
+}
+
+/* Initial state for elements that animate on scroll */
+.animate-on-view {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-on-view.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Stagger transition delays (for .animate-on-view when .is-visible) */
+.animate-on-view.stagger-0.is-visible { transition-delay: 0s; }
+.animate-on-view.stagger-1.is-visible { transition-delay: 0.06s; }
+.animate-on-view.stagger-2.is-visible { transition-delay: 0.12s; }
+.animate-on-view.stagger-3.is-visible { transition-delay: 0.18s; }
+.animate-on-view.stagger-4.is-visible { transition-delay: 0.24s; }
+.animate-on-view.stagger-5.is-visible { transition-delay: 0.3s; }
+.animate-on-view.stagger-6.is-visible { transition-delay: 0.36s; }
+.animate-on-view.stagger-7.is-visible { transition-delay: 0.42s; }
+.animate-on-view.stagger-8.is-visible { transition-delay: 0.48s; }
+.animate-on-view.stagger-9.is-visible { transition-delay: 0.54s; }
+.animate-on-view.stagger-10.is-visible { transition-delay: 0.6s; }
+.animate-on-view.stagger-11.is-visible { transition-delay: 0.66s; }
+.animate-on-view.stagger-12.is-visible { transition-delay: 0.72s; }
+
+/* Transition defaults for interactive elements */
+.transition-smooth {
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hero entrance (runs once on load) */
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  animation: heroReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-reveal-delay-1 { animation-delay: 0.12s; }
+.hero-reveal-delay-2 { animation-delay: 0.24s; }
+.hero-reveal-delay-3 { animation-delay: 0.36s; }
+.hero-reveal-delay-4 { animation-delay: 0.48s; }
+.hero-reveal-delay-5 { animation-delay: 0.6s; }
+.hero-reveal-delay-6 { animation-delay: 0.72s; }
+.hero-reveal-delay-7 { animation-delay: 0.84s; }
+.hero-reveal-delay-8 { animation-delay: 0.96s; }
+
+/* Hero: cinematic overlay gradient (warm vignette) */
+.hero-overlay {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 40%, transparent 0%, transparent 50%, rgba(0,0,0,0.15) 100%),
+    radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, transparent 70%),
+    linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.08) 35%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.45) 100%);
+}
+
+/* Hero: subtle warm glow behind headline */
+.hero-glow {
+  text-shadow: 0 0 80px rgba(0,0,0,0.5), 0 2px 24px rgba(0,0,0,0.35), 0 0 40px rgba(251,191,36,0.08);
+}
+
+/* Hero: subtle film grain for premium depth (optional) */
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Hero slideshow: subtle Ken Burns zoom on active slide (6s to match slide duration) */
+@keyframes heroSlideZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+.hero-slide-zoom {
+  animation: heroSlideZoom 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }

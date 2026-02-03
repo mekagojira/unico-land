@@ -48,7 +48,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${notoSansJP.variable} antialiased ${
+        className={`${inter.variable} ${notoSansJP.variable} antialiased bg-stone-50/30 ${
           locale === 'jp' ? 'font-zen-kaku' : 'font-inter'
         }`}
         suppressHydrationWarning

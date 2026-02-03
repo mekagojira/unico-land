@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { api } from '@/lib/api';
 
 export default function Contact() {
   const t = useTranslations('contact');
@@ -27,16 +28,22 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await api.sendContactMessage({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        subject: formData.subject.trim() || undefined,
+        message: formData.message.trim(),
+      });
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 5000);
-    }, 1500);
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch {
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -50,12 +57,12 @@ export default function Contact() {
         {/* Header */}
         <div className="text-center mb-20">
           <div className="inline-block mb-6">
-            <span className="text-xs font-medium text-blue-700 tracking-[0.2em] uppercase">{t('badge')}</span>
+            <span className="text-xs font-medium text-amber-700 tracking-[0.2em] uppercase">{t('badge')}</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extralight text-gray-900 mb-8 tracking-tighter leading-[1.05]">
             {t('title')}
           </h1>
-          <div className="w-40 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-8"></div>
+          <div className="w-40 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-8" />
           <p className="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
@@ -83,7 +90,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2 tracking-wide">
-                  {t('formName')} <span className="text-blue-600">*</span>
+                  {t('formName')} <span className="text-amber-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -92,14 +99,14 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all font-light"
                   placeholder={t('formNamePlaceholder')}
                 />
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2 tracking-wide">
-                  {t('formEmail')} <span className="text-blue-600">*</span>
+                  {t('formEmail')} <span className="text-amber-600">*</span>
                 </label>
                 <input
                   type="email"
@@ -108,7 +115,7 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all font-light"
                   placeholder={t('formEmailPlaceholder')}
                 />
               </div>
@@ -123,14 +130,14 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all font-light"
                   placeholder={t('formPhonePlaceholder')}
                 />
               </div>
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2 tracking-wide">
-                  {t('formSubject')} <span className="text-blue-600">*</span>
+                  {t('formSubject')} <span className="text-amber-600">*</span>
                 </label>
                 <select
                   id="subject"
@@ -138,7 +145,7 @@ export default function Contact() {
                   required
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light bg-white"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all font-light bg-white"
                 >
                   <option value="">{t('formSubjectPlaceholder')}</option>
                   <option value="sales">{t('formSubjectSales')}</option>
@@ -152,7 +159,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2 tracking-wide">
-                  {t('formMessage')} <span className="text-blue-600">*</span>
+                  {t('formMessage')} <span className="text-amber-600">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -161,7 +168,7 @@ export default function Contact() {
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all font-light resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all font-light resize-none"
                   placeholder={t('formMessagePlaceholder')}
                 />
               </div>
@@ -169,7 +176,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white font-medium rounded-lg hover:from-blue-900 hover:via-blue-800 hover:to-blue-700 transition-all duration-500 transform hover:scale-[1.02] shadow-xl hover:shadow-2xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-8 py-4 bg-gradient-to-r from-amber-700 to-amber-600 text-white font-medium rounded-xl hover:from-amber-800 hover:to-amber-700 transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-amber-900/20 tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? t('formSubmitting') : t('formSubmit')}
               </button>
@@ -179,15 +186,15 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Main Contact Card */}
-            <div className="bg-gradient-to-br from-blue-50/80 via-white to-stone-50/50 rounded-3xl border border-blue-100/50 p-10 md:p-14 shadow-xl">
+            <div className="bg-gradient-to-br from-amber-50/60 via-white to-stone-50/50 rounded-3xl border border-amber-100/60 p-10 md:p-14 shadow-xl">
               <h2 className="text-3xl md:text-4xl font-extralight text-gray-900 mb-10 tracking-tight">
                 {t('infoTitle')}
               </h2>
 
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
@@ -195,15 +202,15 @@ export default function Contact() {
                     <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-2">
                       {t('phoneLabel')}
                     </h3>
-                    <a href={`tel:${t('phone')}`} className="text-2xl font-light text-gray-900 hover:text-blue-700 transition-colors">
+                    <a href={`tel:${t('phone')}`} className="text-2xl font-light text-gray-900 hover:text-amber-700 transition-colors">
                       {t('phone')}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -211,15 +218,15 @@ export default function Contact() {
                     <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-2">
                       {t('emailLabel')}
                     </h3>
-                    <a href={`mailto:${t('email')}`} className="text-xl font-light text-blue-700 hover:text-blue-800 transition-colors break-all">
+                    <a href={`mailto:${t('email')}`} className="text-xl font-light text-amber-700 hover:text-amber-800 transition-colors break-all">
                       {t('email')}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -237,8 +244,8 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>

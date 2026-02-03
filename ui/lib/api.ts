@@ -52,6 +52,29 @@ export interface Service {
   updatedAt: string;
 }
 
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string;
+  type: string;
+  status: string;
+  featuredImage?: string;
+  authorId: string;
+  author?: { id: string; email?: string; username?: string };
+  locale: string;
+  publishedAt?: string;
+  tags?: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BlogListResponse {
+  data: BlogPost[];
+  pagination: { page: number; limit: number; total: number; pages: number };
+}
+
 class ApiClient {
   private baseUrl: string;
 
@@ -75,11 +98,14 @@ class ApiClient {
       cache: "default",
     });
 
+    const json = await response.json();
     if (!response.ok) {
-      throw new Error(`API request failed: ${response.statusText}`);
+      const msg =
+        (json && typeof json.message === "string" ? json.message : null) ||
+        response.statusText;
+      throw new Error(msg || `API request failed: ${response.status}`);
     }
-
-    return response.json();
+    return json as ApiResponse<T>;
   }
 
   /**
@@ -123,6 +149,71 @@ class ApiClient {
     const response = await this.request<Service>(
       `/api/services/${id}?${params.toString()}`
     );
+    return response.data;
+  }
+
+  /**
+   * Get published blog posts (public)
+   */
+  async getBlogPosts(params?: {
+    locale?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<BlogListResponse> {
+    const search = new URLSearchParams();
+    if (params?.locale) search.set("locale", params.locale);
+    if (params?.page) search.set("page", String(params.page));
+    if (params?.limit) search.set("limit", String(params.limit));
+    const q = search.toString();
+    const url = `${this.baseUrl}/api/blog${q ? `?${q}` : ""}`;
+    const res = await fetch(url, {
+      headers: { "Content-Type": "application/json" },
+      cache: "default",
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      const msg =
+        (json && typeof json.message === "string" ? json.message : null) ||
+        res.statusText;
+      throw new Error(msg || `API request failed: ${res.status}`);
+    }
+    return {
+      data: json.data ?? [],
+      pagination: json.pagination ?? {
+        page: 1,
+        limit: 10,
+        total: 0,
+        pages: 0,
+      },
+    };
+  }
+
+  /**
+   * Get a single published blog post by slug (public)
+   */
+  async getBlogPost(slug: string, locale?: string): Promise<BlogPost> {
+    const search = new URLSearchParams();
+    if (locale) search.set("locale", locale);
+    const q = search.toString();
+    const response = await this.request<BlogPost>(
+      `/api/blog/${encodeURIComponent(slug)}${q ? `?${q}` : ""}`
+    );
+    return response.data;
+  }
+
+  /**
+   * Send contact message to admin (public)
+   */
+  async sendContactMessage(body: {
+    name: string;
+    email: string;
+    subject?: string;
+    message: string;
+  }): Promise<{ id: string }> {
+    const response = await this.request<{ id: string }>("/api/contact", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
     return response.data;
   }
 }

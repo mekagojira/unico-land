@@ -297,7 +297,7 @@ export default function HeroSlideshow({ onLoadingChange }: HeroSlideshowProps) {
               willChange: 'opacity',
             }}
           >
-            <div className="absolute inset-0">
+            <div className={`absolute inset-0 ${index === currentIndex ? 'hero-slide-zoom' : ''}`}>
               <Image
                 src={image.url}
                 alt={image.alt}
@@ -310,8 +310,8 @@ export default function HeroSlideshow({ onLoadingChange }: HeroSlideshowProps) {
                 onLoad={() => handleImageLoad(image.id)}
               />
               {/* Overlay gradient for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/30 to-black/40"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/30 to-black/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             </div>
           </div>
         ))}
@@ -369,13 +369,6 @@ export default function HeroSlideshow({ onLoadingChange }: HeroSlideshowProps) {
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
-      </div>
-
-      {/* Slide Counter */}
-      <div className="absolute top-6 md:top-8 right-4 md:right-8 z-30 px-3 md:px-4 py-1.5 md:py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 pointer-events-none">
-        <span className="text-white text-xs md:text-sm font-light tracking-wide">
-          {currentIndex + 1} / {luxuryImages.length}
-        </span>
       </div>
 
       {/* Pause/Play Indicator */}

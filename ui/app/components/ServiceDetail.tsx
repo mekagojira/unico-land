@@ -33,12 +33,12 @@ export default function ServiceDetail({ serviceId, service, locale = 'jp' }: Ser
         {/* Header */}
         <div className="text-center mb-20">
           <div className="inline-block mb-6">
-            <span className="text-xs font-medium text-blue-700 tracking-[0.2em] uppercase">{t('badge')}</span>
+            <span className="text-xs font-medium text-amber-700 tracking-[0.2em] uppercase">{t('badge')}</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extralight text-gray-900 mb-6 tracking-tighter leading-[1.05]">
             {title}
           </h1>
-          <div className="w-40 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-8"></div>
+          <div className="w-40 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
             {description}
           </p>
@@ -86,7 +86,7 @@ export default function ServiceDetail({ serviceId, service, locale = 'jp' }: Ser
 
         {/* Service Details */}
         {content && (
-          <div className="bg-gradient-to-br from-blue-50/50 via-white to-stone-50/30 rounded-3xl border border-blue-100/50 p-12 md:p-16 mb-16">
+          <div className="bg-gradient-to-br from-amber-50/50 via-white to-stone-50/30 rounded-3xl border border-amber-100/50 p-12 md:p-16 mb-16">
             <div className="prose prose-lg max-w-none">
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light whitespace-pre-line">
                 {content}
@@ -99,7 +99,7 @@ export default function ServiceDetail({ serviceId, service, locale = 'jp' }: Ser
         <div className="text-center">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-12 py-6 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white font-medium rounded-lg hover:from-blue-900 hover:via-blue-800 hover:to-blue-700 transition-all duration-500 transform hover:scale-[1.02] shadow-2xl hover:shadow-blue-900/30 tracking-wide"
+            className="inline-flex items-center justify-center px-12 py-6 bg-gradient-to-r from-amber-700 to-amber-600 text-white font-medium rounded-xl hover:from-amber-800 hover:to-amber-700 transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-amber-900/20 tracking-wide"
           >
             {t('ctaContact')}
             <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

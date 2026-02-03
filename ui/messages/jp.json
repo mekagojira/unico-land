@@ -123,6 +123,9 @@
     "imagePlaceholder": "ブログ画像",
     "readMore": "続きを読む",
     "viewAll": "ブログ一覧を見る",
+    "noPosts": "現在、投稿はありません。",
+    "backToBlog": "ブログ一覧に戻る",
+    "publishedAt": "公開日",
     "posts": {
       "post1": {
         "title": "外国籍の方向け住宅ローンガイド",

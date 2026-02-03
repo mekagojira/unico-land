@@ -4,7 +4,11 @@ import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { useState } from 'react';
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  variant?: 'default' | 'overHero';
+}
+
+export default function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -22,19 +26,25 @@ export default function LanguageSwitcher() {
     setIsOpen(false);
   };
 
+  const isOverHero = variant === 'overHero';
+
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-600 transition-colors bg-white"
+        className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
+          isOverHero
+            ? 'border-white/30 bg-white/10 hover:border-amber-300/60 hover:bg-white/20 text-white/95'
+            : 'border-gray-200 hover:border-amber-600 bg-white text-gray-700'
+        }`}
         aria-label="Switch language"
       >
         <span className="text-lg">{currentLang.flag}</span>
-        <span className="text-sm font-medium text-gray-700 hidden sm:inline">
+        <span className={`text-sm font-medium hidden sm:inline ${isOverHero ? 'text-white/95' : 'text-gray-700'}`}>
           {currentLang.name}
         </span>
         <svg
-          className={`w-4 h-4 text-gray-600 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform ${isOverHero ? 'text-white/80' : 'text-gray-600'} ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

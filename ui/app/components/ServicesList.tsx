@@ -34,14 +34,14 @@ export default function ServicesList({ services = [] }: ServicesListProps) {
         {/* Header */}
         <div className="text-center mb-16 md:mb-20 lg:mb-24">
           <div className="inline-block mb-4 md:mb-6">
-            <span className="text-xs font-medium text-blue-700 tracking-[0.2em] uppercase">
+            <span className="text-xs font-medium text-amber-700 tracking-[0.2em] uppercase">
               {t("badge")}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight text-gray-900 mb-6 md:mb-8 tracking-tighter leading-[1.05] px-4">
             {t("title")}
           </h1>
-          <div className="w-32 md:w-40 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-6 md:mb-8"></div>
+          <div className="w-32 md:w-40 h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-6 md:mb-8"></div>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed px-4">
             {t("subtitle")}
           </p>
@@ -54,7 +54,7 @@ export default function ServicesList({ services = [] }: ServicesListProps) {
               <Link
                 key={service.id}
                 href={`/service/${service.id}`}
-                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-stone-50/50 border border-gray-200/50 hover:border-blue-300 transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-3"
+                className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-stone-50/50 border border-gray-200/50 hover:border-amber-200 transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-3"
               >
                 {/* Luxury shine effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform translate-x-[-100%] group-hover:translate-x-[100%] z-10"></div>
@@ -88,7 +88,7 @@ export default function ServicesList({ services = [] }: ServicesListProps) {
                   </p>
 
                   {/* CTA Link */}
-                  <div className="flex items-center text-blue-700 font-medium group-hover:text-blue-800 transition-colors">
+                  <div className="flex items-center text-amber-700 font-medium group-hover:text-amber-800 transition-colors">
                     <span className="text-sm md:text-base tracking-wide">
                       {t("viewMore")}
                     </span>
@@ -126,7 +126,7 @@ export default function ServicesList({ services = [] }: ServicesListProps) {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-600 text-white font-medium rounded-lg hover:from-blue-900 hover:via-blue-800 hover:to-blue-700 transition-all duration-500 transform hover:scale-[1.02] shadow-2xl hover:shadow-blue-900/30 tracking-wide"
+              className="inline-flex items-center justify-center px-10 md:px-12 py-5 md:py-6 bg-gradient-to-r from-amber-700 to-amber-600 text-white font-medium rounded-xl hover:from-amber-800 hover:to-amber-700 transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-amber-900/20 tracking-wide"
             >
               {t("ctaContact")}
               <svg

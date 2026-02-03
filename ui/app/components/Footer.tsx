@@ -39,7 +39,7 @@ export default function Footer({ companyInfo }: FooterProps) {
   return (
     <footer
       id="contact"
-      className="bg-gray-900 text-gray-300 relative overflow-hidden"
+      className="bg-gray-900 text-gray-300 relative overflow-hidden pattern-grid"
     >
       {/* Subtle pattern overlay */}
       <div
@@ -99,7 +99,7 @@ export default function Footer({ companyInfo }: FooterProps) {
                 <li key={link}>
                   <a
                     href="#"
-                    className="hover:text-blue-400 transition-colors font-light"
+                    className="hover:text-amber-400 transition-colors duration-300 font-light"
                   >
                     {t(`links.${link}`)}
                   </a>
@@ -110,7 +110,7 @@ export default function Footer({ companyInfo }: FooterProps) {
                   href="https://uni-co-group.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-blue-400 transition-colors font-light"
+                  className="hover:text-amber-400 transition-colors duration-300 font-light"
                 >
                   {t("companyWebsite")}
                 </a>
@@ -128,7 +128,7 @@ export default function Footer({ companyInfo }: FooterProps) {
                   <li key={service.id}>
                     <Link
                       href={`/service/${service.id}`}
-                      className="hover:text-blue-400 transition-colors font-light"
+                      className="hover:text-amber-400 transition-colors duration-300 font-light"
                     >
                       {service.title}
                     </Link>
@@ -138,7 +138,7 @@ export default function Footer({ companyInfo }: FooterProps) {
                 <li>
                   <Link
                     href="/service"
-                    className="hover:text-blue-400 transition-colors font-light"
+                    className="hover:text-amber-400 transition-colors duration-300 font-light"
                   >
                     {t("links.services")}
                   </Link>
@@ -156,7 +156,7 @@ export default function Footer({ companyInfo }: FooterProps) {
                 <li key={link}>
                   <a
                     href="#"
-                    className="hover:text-blue-400 transition-colors font-light"
+                    className="hover:text-amber-400 transition-colors duration-300 font-light"
                   >
                     {t(`links.${link}`)}
                   </a>
@@ -174,7 +174,7 @@ export default function Footer({ companyInfo }: FooterProps) {
                 href="https://uni-co-group.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-400 transition-colors font-light"
+                className="hover:text-amber-400 transition-colors duration-300 font-light"
               >
                 {t("companyWebsite")}
               </a>
