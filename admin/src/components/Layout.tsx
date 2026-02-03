@@ -16,6 +16,8 @@ import {
 import {
   Business as BusinessIcon,
   Category as CategoryIcon,
+  Article as ArticleIcon,
+  Mail as MailIcon,
   Logout as LogoutIcon,
 } from "@mui/icons-material";
 import { useAuth } from "../contexts/AuthContext";
@@ -23,6 +25,8 @@ import { useAuth } from "../contexts/AuthContext";
 const menuItems = [
   { text: "Thông tin công ty", icon: <BusinessIcon />, path: "/company" },
   { text: "Dịch vụ", icon: <CategoryIcon />, path: "/services" },
+  { text: "Nội dung / Blog", icon: <ArticleIcon />, path: "/content" },
+  { text: "Tin nhắn liên hệ", icon: <MailIcon />, path: "/messages" },
 ];
 
 export default function Layout() {
@@ -53,7 +57,9 @@ export default function Layout() {
   };
 
   const currentTabIndex = menuItems.findIndex(
-    (item) => item.path === location.pathname
+    (item) =>
+      item.path === location.pathname ||
+      location.pathname.startsWith(item.path + "/")
   );
 
   return (

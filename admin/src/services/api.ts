@@ -266,6 +266,75 @@ export const servicesAPI = {
   },
 };
 
+// Blog API (public posts – for admin preview)
+export const blogAPI = {
+  getPosts: async (params?: {
+    locale?: string;
+    page?: number;
+    limit?: number;
+  }): Promise<PaginatedResponse<Content>> => {
+    const response = await api.get<PaginatedResponse<Content>>("/api/blog", {
+      params,
+    });
+    return response.data;
+  },
+
+  getBySlug: async (
+    slug: string,
+    locale?: string
+  ): Promise<ApiResponse<Content>> => {
+    const response = await api.get<ApiResponse<Content>>(
+      `/api/blog/${encodeURIComponent(slug)}`,
+      { params: locale ? { locale } : {} }
+    );
+    return response.data;
+  },
+};
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  subject: string | null;
+  message: string;
+  isRead: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Contact messages API (admin)
+export const contactAPI = {
+  list: async (params?: {
+    page?: number;
+    limit?: number;
+    isRead?: string;
+  }): Promise<PaginatedResponse<ContactMessage>> => {
+    const response = await api.get<PaginatedResponse<ContactMessage>>(
+      "/api/contact",
+      { params }
+    );
+    return response.data;
+  },
+
+  getById: async (id: string): Promise<ApiResponse<ContactMessage>> => {
+    const response = await api.get<ApiResponse<ContactMessage>>(
+      `/api/contact/${id}`
+    );
+    return response.data;
+  },
+
+  markRead: async (
+    id: string,
+    isRead: boolean
+  ): Promise<ApiResponse<ContactMessage>> => {
+    const response = await api.patch<ApiResponse<ContactMessage>>(
+      `/api/contact/${id}/read`,
+      { isRead }
+    );
+    return response.data;
+  },
+};
+
 // Upload API
 export const uploadAPI = {
   // Upload file through backend (backend handles R2 upload)

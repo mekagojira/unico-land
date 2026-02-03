@@ -158,15 +158,16 @@ const initD1 = async () => {
     console.log("✅ Database schema initialized successfully!");
 
     // Read and execute additional migrations
-    try {
-      const migration2 = readFileSync("./migrations/002_company_and_services.sql", "utf-8");
-      console.log("\n📝 Executing migration 002 (company and services)...");
-      await executeSQL(db, migration2);
-      console.log("✅ Migration 002 completed successfully!");
-    } catch (error) {
-      // Migration file might not exist yet, that's okay
-      if (error.code !== "ENOENT") {
-        console.error("⚠️  Warning: Could not execute migration 002:", error.message);
+    for (const name of ["002_company_and_services", "003_contact_messages"]) {
+      try {
+        const migration = readFileSync(`./migrations/${name}.sql`, "utf-8");
+        console.log(`\n📝 Executing migration ${name}...`);
+        await executeSQL(db, migration);
+        console.log(`✅ Migration ${name} completed successfully!`);
+      } catch (error) {
+        if (error.code !== "ENOENT") {
+          console.error(`⚠️  Warning: Could not execute migration ${name}:`, error.message);
+        }
       }
     }
 

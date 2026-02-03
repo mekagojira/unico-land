@@ -11,6 +11,8 @@ import ContentForm from './pages/ContentForm';
 import CompanyInfo from './pages/CompanyInfo';
 import ServicesList from './pages/ServicesList';
 import ServiceForm from './pages/ServiceForm';
+import ContactMessagesList from './pages/ContactMessagesList';
+import ContactMessageDetail from './pages/ContactMessageDetail';
 
 const theme = createTheme({
   palette: {
@@ -47,6 +49,8 @@ function App() {
               <Route path="services" element={<ServicesList />} />
               <Route path="services/new" element={<ServiceForm />} />
               <Route path="services/:id" element={<ServiceForm />} />
+              <Route path="messages" element={<ContactMessagesList />} />
+              <Route path="messages/:id" element={<ContactMessageDetail />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

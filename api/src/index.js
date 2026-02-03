@@ -9,6 +9,8 @@ import contentRouter from "./routes/content.js";
 import uploadRouter from "./routes/upload.js";
 import companyRouter from "./routes/company.js";
 import servicesRouter from "./routes/services.js";
+import blogRouter from "./routes/blog.js";
+import contactRouter from "./routes/contact.js";
 
 // Import error handler
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -54,6 +56,8 @@ app.route("/api/content", contentRouter);
 app.route("/api/upload", uploadRouter);
 app.route("/api/company", companyRouter);
 app.route("/api/services", servicesRouter);
+app.route("/api/blog", blogRouter);
+app.route("/api/contact", contactRouter);
 
 // 404 handler
 app.notFound((c) => {
