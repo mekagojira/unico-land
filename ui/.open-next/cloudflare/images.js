@@ -75,7 +75,7 @@ function getOpenNextErrorLogLevel() {
   }
 }
 
-// node_modules/.pnpm/@opennextjs+cloudflare@1.14.0_wrangler@4.51.0/node_modules/@opennextjs/cloudflare/dist/cli/templates/images.js
+// node_modules/.pnpm/@opennextjs+cloudflare@1.14.0_wrangler@4.61.1/node_modules/@opennextjs/cloudflare/dist/cli/templates/images.js
 async function handleImageRequest(requestURL, requestHeaders, env) {
   const parseResult = parseImageRequest(requestURL, requestHeaders);
   if (!parseResult.ok) {
